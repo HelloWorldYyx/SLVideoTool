@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		84760ABC1F01F65900D2D70A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ABB1F01F65900D2D70A /* main.m */; };
+		84760ABF1F01F65900D2D70A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ABE1F01F65900D2D70A /* AppDelegate.m */; };
+		84760AC21F01F65900D2D70A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760AC11F01F65900D2D70A /* ViewController.m */; };
+		84760AC51F01F65900D2D70A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84760AC31F01F65900D2D70A /* Main.storyboard */; };
+		84760AC71F01F65900D2D70A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84760AC61F01F65900D2D70A /* Assets.xcassets */; };
+		84760ACA1F01F65900D2D70A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84760AC81F01F65900D2D70A /* LaunchScreen.storyboard */; };
+		84760AD51F01F65900D2D70A /* SLVideoSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760AD41F01F65900D2D70A /* SLVideoSDKTests.m */; };
+		84760AE01F01F65900D2D70A /* SLVideoSDKUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84760AD11F01F65900D2D70A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84760AAF1F01F65900D2D70A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84760AB61F01F65900D2D70A;
+			remoteInfo = SLVideoSDK;
+		};
+		84760ADC1F01F65900D2D70A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84760AAF1F01F65900D2D70A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84760AB61F01F65900D2D70A;
+			remoteInfo = SLVideoSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		84760AB71F01F65900D2D70A /* SLVideoSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLVideoSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84760ABB1F01F65900D2D70A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84760ABD1F01F65900D2D70A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		84760ABE1F01F65900D2D70A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		84760AC01F01F65900D2D70A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		84760AC11F01F65900D2D70A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		84760AC41F01F65900D2D70A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		84760AC61F01F65900D2D70A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84760AC91F01F65900D2D70A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84760ACB1F01F65900D2D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84760AD01F01F65900D2D70A /* SLVideoSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLVideoSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84760AD41F01F65900D2D70A /* SLVideoSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLVideoSDKTests.m; sourceTree = "<group>"; };
+		84760AD61F01F65900D2D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84760ADB1F01F65900D2D70A /* SLVideoSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLVideoSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLVideoSDKUITests.m; sourceTree = "<group>"; };
+		84760AE11F01F65900D2D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84760AB41F01F65900D2D70A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760ACD1F01F65900D2D70A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760AD81F01F65900D2D70A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84760AAE1F01F65900D2D70A = {
+			isa = PBXGroup;
+			children = (
+				84760AB91F01F65900D2D70A /* SLVideoSDK */,
+				84760AD31F01F65900D2D70A /* SLVideoSDKTests */,
+				84760ADE1F01F65900D2D70A /* SLVideoSDKUITests */,
+				84760AB81F01F65900D2D70A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		84760AB81F01F65900D2D70A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84760AB71F01F65900D2D70A /* SLVideoSDK.app */,
+				84760AD01F01F65900D2D70A /* SLVideoSDKTests.xctest */,
+				84760ADB1F01F65900D2D70A /* SLVideoSDKUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84760AB91F01F65900D2D70A /* SLVideoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				84760ABD1F01F65900D2D70A /* AppDelegate.h */,
+				84760ABE1F01F65900D2D70A /* AppDelegate.m */,
+				84760AC01F01F65900D2D70A /* ViewController.h */,
+				84760AC11F01F65900D2D70A /* ViewController.m */,
+				84760AC31F01F65900D2D70A /* Main.storyboard */,
+				84760AC61F01F65900D2D70A /* Assets.xcassets */,
+				84760AC81F01F65900D2D70A /* LaunchScreen.storyboard */,
+				84760ACB1F01F65900D2D70A /* Info.plist */,
+				84760ABA1F01F65900D2D70A /* Supporting Files */,
+			);
+			path = SLVideoSDK;
+			sourceTree = "<group>";
+		};
+		84760ABA1F01F65900D2D70A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				84760ABB1F01F65900D2D70A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84760AD31F01F65900D2D70A /* SLVideoSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				84760AD41F01F65900D2D70A /* SLVideoSDKTests.m */,
+				84760AD61F01F65900D2D70A /* Info.plist */,
+			);
+			path = SLVideoSDKTests;
+			sourceTree = "<group>";
+		};
+		84760ADE1F01F65900D2D70A /* SLVideoSDKUITests */ = {
+			isa = PBXGroup;
+			children = (
+				84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */,
+				84760AE11F01F65900D2D70A /* Info.plist */,
+			);
+			path = SLVideoSDKUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84760AB61F01F65900D2D70A /* SLVideoSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84760AE41F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDK" */;
+			buildPhases = (
+				84760AB31F01F65900D2D70A /* Sources */,
+				84760AB41F01F65900D2D70A /* Frameworks */,
+				84760AB51F01F65900D2D70A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SLVideoSDK;
+			productName = SLVideoSDK;
+			productReference = 84760AB71F01F65900D2D70A /* SLVideoSDK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		84760ACF1F01F65900D2D70A /* SLVideoSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84760AE71F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDKTests" */;
+			buildPhases = (
+				84760ACC1F01F65900D2D70A /* Sources */,
+				84760ACD1F01F65900D2D70A /* Frameworks */,
+				84760ACE1F01F65900D2D70A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84760AD21F01F65900D2D70A /* PBXTargetDependency */,
+			);
+			name = SLVideoSDKTests;
+			productName = SLVideoSDKTests;
+			productReference = 84760AD01F01F65900D2D70A /* SLVideoSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		84760ADA1F01F65900D2D70A /* SLVideoSDKUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84760AEA1F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDKUITests" */;
+			buildPhases = (
+				84760AD71F01F65900D2D70A /* Sources */,
+				84760AD81F01F65900D2D70A /* Frameworks */,
+				84760AD91F01F65900D2D70A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84760ADD1F01F65900D2D70A /* PBXTargetDependency */,
+			);
+			name = SLVideoSDKUITests;
+			productName = SLVideoSDKUITests;
+			productReference = 84760ADB1F01F65900D2D70A /* SLVideoSDKUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84760AAF1F01F65900D2D70A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = YYX;
+				TargetAttributes = {
+					84760AB61F01F65900D2D70A = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = G583SJY324;
+						ProvisioningStyle = Automatic;
+					};
+					84760ACF1F01F65900D2D70A = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = G583SJY324;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 84760AB61F01F65900D2D70A;
+					};
+					84760ADA1F01F65900D2D70A = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = G583SJY324;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 84760AB61F01F65900D2D70A;
+					};
+				};
+			};
+			buildConfigurationList = 84760AB21F01F65900D2D70A /* Build configuration list for PBXProject "SLVideoSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 84760AAE1F01F65900D2D70A;
+			productRefGroup = 84760AB81F01F65900D2D70A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84760AB61F01F65900D2D70A /* SLVideoSDK */,
+				84760ACF1F01F65900D2D70A /* SLVideoSDKTests */,
+				84760ADA1F01F65900D2D70A /* SLVideoSDKUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84760AB51F01F65900D2D70A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84760ACA1F01F65900D2D70A /* LaunchScreen.storyboard in Resources */,
+				84760AC71F01F65900D2D70A /* Assets.xcassets in Resources */,
+				84760AC51F01F65900D2D70A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760ACE1F01F65900D2D70A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760AD91F01F65900D2D70A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84760AB31F01F65900D2D70A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84760AC21F01F65900D2D70A /* ViewController.m in Sources */,
+				84760ABF1F01F65900D2D70A /* AppDelegate.m in Sources */,
+				84760ABC1F01F65900D2D70A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760ACC1F01F65900D2D70A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84760AD51F01F65900D2D70A /* SLVideoSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84760AD71F01F65900D2D70A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84760AE01F01F65900D2D70A /* SLVideoSDKUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84760AD21F01F65900D2D70A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84760AB61F01F65900D2D70A /* SLVideoSDK */;
+			targetProxy = 84760AD11F01F65900D2D70A /* PBXContainerItemProxy */;
+		};
+		84760ADD1F01F65900D2D70A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84760AB61F01F65900D2D70A /* SLVideoSDK */;
+			targetProxy = 84760ADC1F01F65900D2D70A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		84760AC31F01F65900D2D70A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84760AC41F01F65900D2D70A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		84760AC81F01F65900D2D70A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84760AC91F01F65900D2D70A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84760AE21F01F65900D2D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84760AE31F01F65900D2D70A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		84760AE51F01F65900D2D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		84760AE61F01F65900D2D70A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDK/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDK;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		84760AE81F01F65900D2D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SLVideoSDK.app/SLVideoSDK";
+			};
+			name = Debug;
+		};
+		84760AE91F01F65900D2D70A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SLVideoSDK.app/SLVideoSDK";
+			};
+			name = Release;
+		};
+		84760AEB1F01F65900D2D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDKUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDKUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SLVideoSDK;
+			};
+			name = Debug;
+		};
+		84760AEC1F01F65900D2D70A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = G583SJY324;
+				INFOPLIST_FILE = SLVideoSDKUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = POCO.SLVideoSDKUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SLVideoSDK;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84760AB21F01F65900D2D70A /* Build configuration list for PBXProject "SLVideoSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84760AE21F01F65900D2D70A /* Debug */,
+				84760AE31F01F65900D2D70A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84760AE41F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84760AE51F01F65900D2D70A /* Debug */,
+				84760AE61F01F65900D2D70A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		84760AE71F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84760AE81F01F65900D2D70A /* Debug */,
+				84760AE91F01F65900D2D70A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		84760AEA1F01F65900D2D70A /* Build configuration list for PBXNativeTarget "SLVideoSDKUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84760AEB1F01F65900D2D70A /* Debug */,
+				84760AEC1F01F65900D2D70A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84760AAF1F01F65900D2D70A /* Project object */;
+}
