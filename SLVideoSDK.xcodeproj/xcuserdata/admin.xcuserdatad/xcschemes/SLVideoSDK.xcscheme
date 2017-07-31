@@ -5,6 +5,22 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84760AB61F01F65900D2D70A"
+               BuildableName = "SLVideoSDK.app"
+               BlueprintName = "SLVideoSDK"
+               ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -12,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84760ACF1F01F65900D2D70A"
+               BuildableName = "SLVideoSDKTests.xctest"
+               BlueprintName = "SLVideoSDKTests"
+               ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84760ADA1F01F65900D2D70A"
+               BuildableName = "SLVideoSDKUITests.xctest"
+               BlueprintName = "SLVideoSDKUITests"
+               ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "84760AB61F01F65900D2D70A"
+            BuildableName = "SLVideoSDK.app"
+            BlueprintName = "SLVideoSDK"
+            ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -26,6 +71,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "84760AB61F01F65900D2D70A"
+            BuildableName = "SLVideoSDK.app"
+            BlueprintName = "SLVideoSDK"
+            ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -35,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "84760AB61F01F65900D2D70A"
+            BuildableName = "SLVideoSDK.app"
+            BlueprintName = "SLVideoSDK"
+            ReferencedContainer = "container:SLVideoSDK.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
