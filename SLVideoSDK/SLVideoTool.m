@@ -7,7 +7,9 @@
 //
 
 #import "SLVideoTool.h"
+
 #import "OISamplebufferRef.h"
+
 
 NSString * const SLVideoMixingAudioParameterAudioAssetURLKey    = @"Audio asset URL";
 NSString * const SLVideoMixingAudioParameterVideoVolumeKey      = @"Video volume";
@@ -41,6 +43,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     NSMutableArray *reverseCacheFramesCMtimes_;
     NSInteger reverseBlockSize_;
     
+
 }
 @end
 
@@ -68,7 +71,6 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         _size              = CGSizeZero;
         isClip_            = NO;
         isMix_             = NO;
-
     }
     return self;
 }
@@ -89,6 +91,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         reverseCacheBlocks_ = [[NSMutableArray alloc] init];
         reverseCacheFramesCMtimes_ = [[NSMutableArray alloc] init];
         reverseBlockSize_ = 1;
+
     }
     return self;
 }
@@ -269,6 +272,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
                                 audioRangeTime:audioTimeRange
                                 vidioRangeTime:videoTimeRange
                                 slowVolumeTime:CMTimeMake(300, 100)];
+
     return mixFinsh;
 
 }
@@ -847,6 +851,8 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
                 
                 
                 audioEndSecond = audioMixRangeSecond;
+                float endSecond = audioMixRangeSecond;
+
 
                 
             } else {
@@ -1011,6 +1017,9 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
 }
 
 
+
+
+
 #pragma mark - 初始化AVassetReader
 //初始化AVAssetReader
 - (void)initializeAssetReader
@@ -1024,14 +1033,12 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         NSDictionary *outputSettings = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)};
         AVAssetReaderVideoCompositionOutput *readerVideoOutput = [AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:[mainComposition_ tracksWithMediaType:AVMediaTypeVideo]
                                                                                                                                          videoSettings:outputSettings];
-        
 #if ! TARGET_IPHONE_SIMULATOR
         //在模拟机调试的时候
         if( [AVVideoComposition isKindOfClass:[AVMutableVideoComposition class]] )
             [(AVMutableVideoComposition*)selectVideoComposition_ setRenderScale:1.0];
 #endif
         readerVideoOutput.videoComposition = selectVideoComposition_;
-        
         readerVideoOutput.alwaysCopiesSampleData = NO;
         if ([assetReader_ canAddOutput:readerVideoOutput]) {
             [assetReader_ addOutput:readerVideoOutput];
@@ -1058,7 +1065,10 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         
         videoTrackOutput_ = (AVAssetReaderTrackOutput *)readerVideoOutput;
         audioTrackOutput_ = (AVAssetReaderTrackOutput *)readerAudioOutput;
-    }  else {
+
+    }
+    else {
+
         NSError *error;
         AVAssetReader *assetReader = [[AVAssetReader alloc] initWithAsset:self.AVAsset error:&error];
         if (error) {
@@ -1168,7 +1178,9 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
  @return 返回编码字典
  */
 - (NSDictionary *)configVideoInput{
+
     //@{AVVideoAverageBitRateKey : [NSNumber numberWithDouble:3.0 * 1024.0 * 1024.0]};
+
     NSDictionary *videoInputSetting = @{
                                         AVVideoCodecKey:AVVideoCodecH264,
                                         AVVideoWidthKey: @(374),
@@ -1207,15 +1219,17 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     [assetWriter startSessionAtSourceTime:kCMTimeZero];
 
     __weak __typeof(&*self) weakSelf = self;
+    
+
     dispatch_group_enter(dispatchGroup);
     __block BOOL isAudioFirst = YES;
     [assetWriterAudioInput requestMediaDataWhenReadyOnQueue:rwAudioSerializationQueue usingBlock:^{
         
         while ([assetWriterAudioInput isReadyForMoreMediaData]&&assetReader.status == AVAssetReaderStatusReading) {
             CMSampleBufferRef nextSampleBuffer = [audioTrackOutput_ copyNextSampleBuffer];
+
             [weakSelf.delegate copyAudioSampleBufferRef:nextSampleBuffer];
-            
-            
+        
             if (isAudioFirst) {
                 isAudioFirst = !isAudioFirst;
                 continue;
@@ -1240,7 +1254,10 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         while ([assetWriterVideoInput isReadyForMoreMediaData]&&assetReader.status == AVAssetReaderStatusReading) {
             
             CMSampleBufferRef nextSampleBuffer = [videoTrackOutput_ copyNextSampleBuffer];
+        
+        while ([assetWriterVideoInput isReadyForMoreMediaData]&&assetReader.status == AVAssetReaderStatusReading) {
             
+            CMSampleBufferRef nextSampleBuffer = [videoTrackOutput_ copyNextSampleBuffer];
             if (isVideoFirst) {
                 isVideoFirst = !isVideoFirst;
                 continue;
@@ -1276,9 +1293,13 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
             reverseBuffer.sampleBuffer = nextSampleBuffer;
             [reverseCacheBlocks_ addObject:reverseBuffer];
             [reverseCacheFramesCMtimes_ addObject:[NSValue valueWithCMTime:CMSampleBufferGetPresentationTimeStamp(nextSampleBuffer)]];
+            
         }
+    
+        }
+  
     }];
-    NSLog(@"%ld",assetWriter.status);
+
     dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^{
         [assetWriter finishWritingWithCompletionHandler:^{
             BOOL isFinsh;
@@ -1290,15 +1311,22 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
                 isFinsh = NO;
                 NSLog(@"加载失败");
             }
+            
             if ([weakSelf.delegate respondsToSelector:@selector(synthesisResult:)]) {
                 [weakSelf.delegate synthesisResult:isFinsh];
+                if ([self.delegate respondsToSelector:@selector(synthesisResult:)]) {
+                    [self.delegate synthesisResult:isFinsh];
+                }
+                
             }
         }];
+        
+        
     });
 }
-- (void)executeMoviewWrite:(CMSampleBufferRef )sampleBuffer{
-    
-}
+
+                  
+
 
 
 #pragma  mark - 拼接
@@ -1312,11 +1340,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     } else {
         
     }
-    //两个时间比较 可以这样来判断这个时间是否是无效时间
-    if (CMTIME_COMPARE_INLINE(kCMTimeZero, !=, kCMTimeInvalid)) {
-        
-    }
-    
+
     AVMutableComposition *mainComposition = [[AVMutableComposition alloc] init];
     AVMutableCompositionTrack *compositionVideoTrack = [mainComposition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableCompositionTrack *soundtrackTrack = [mainComposition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
@@ -1557,6 +1581,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     videoAudioMixTools_ = videoAudioMixTools;
 
 }
+
 
 
 - (AVMutableVideoCompositionLayerInstruction *)copyAndResetVideoLayerInstruction:(AVVideoCompositionLayerInstruction *)ins

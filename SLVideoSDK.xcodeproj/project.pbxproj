@@ -90,6 +90,7 @@
 		84760ADB1F01F65900D2D70A /* SLVideoSDKUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SLVideoSDKUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLVideoSDKUITests.m; sourceTree = "<group>"; };
 		84760AE11F01F65900D2D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84760AED1F01F6DF00D2D70A /* SLVideoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLVideoTool.h; sourceTree = "<group>"; };
 		84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLVideoTool.m; sourceTree = "<group>"; };
 		84CC78AF1F43F32800EEABC9 /* 234.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 234.mp4; path = "../../../../Library/Developer/CoreSimulator/Devices/03DEFCCD-D4F6-4D2C-BAE8-0EF5DA13EFB8/data/Containers/Data/Application/484C3E64-AAB1-41D5-B08E-20F397C76DAF/Documents/234.mp4"; sourceTree = "<group>"; };
 		84FAF6641F1DBBF600556508 /* IMG_2280.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_2280.m4v; sourceTree = "<group>"; };
@@ -168,11 +169,12 @@
 				844891A61F2F029F00F78244 /* PCMPlayer.h */,
 				844891A71F2F029F00F78244 /* PCMPlayer.m */,
 				84434C381F28780700A4C868 /* SLVideoTool.h */,
-				84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */,
 				844D375F1F74B2840086CFA3 /* jointVideo.h */,
 				844D37601F74B2840086CFA3 /* jointVideo.m */,
 				843B44D11F58FCCB00888B04 /* OISamplebufferRef.h */,
 				843B44D21F58FCCB00888B04 /* OISamplebufferRef.m */,
+				84760AED1F01F6DF00D2D70A /* SLVideoTool.h */,
+				84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */,
 				84760AC31F01F65900D2D70A /* Main.storyboard */,
 				84760AC61F01F65900D2D70A /* Assets.xcassets */,
 				84760AC81F01F65900D2D70A /* LaunchScreen.storyboard */,
@@ -331,6 +333,11 @@
 				847063441F05F05200007209 /* cf.mp4 in Resources */,
 				842F9D1C1F03A9D0007E133E /* 不要说话.mp3 in Resources */,
 				843935BC1F78B55F004F4D64 /* b.m4v in Resources */,
+				84FAF6671F1DBC0600556508 /* IMG_2280.m4v in Resources */,
+				84FAF6681F1DBC0600556508 /* IMG_2283.MOV in Resources */,
+				84FAF6691F1DBC0600556508 /* IMG_6820.MP4 in Resources */,
+				847063441F05F05200007209 /* cf.mp4 in Resources */,
+				842F9D1C1F03A9D0007E133E /* 不要说话.mp3 in Resources */,
 				842F9D1B1F03A9CC007E133E /* 123.mp4 in Resources */,
 				842F9D1A1F03A9B7007E133E /* sc-18.mp4 in Resources */,
 				84760ACA1F01F65900D2D70A /* LaunchScreen.storyboard in Resources */,

@@ -31,7 +31,6 @@
     NSURL *videoInputUrl = [[NSBundle mainBundle] URLForResource:@"789" withExtension:@"mp4"];
     _videoTool = [[SLVideoTool alloc]initWithURL:videoInputUrl];
     _videoTool.delegate = self;
-
     BOOL isMix;
     NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
     [parametersDic setObject:audioInpitUrl2 forKey:SLVideoMixingAudioParameterAudioAssetURLKey];
@@ -41,13 +40,16 @@
     [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(100, 100), CMTimeMake(500, 100))] forKey:SlVideoMixingAudioParameterTimeRangeOfAudioKey];
     [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(0, 100), CMTimeMake(5000, 100))] forKey:SLVideoMixingAudioParameterTimeRangeOfVideoKey];
 //    isMix = [_videoTool mixAudioWithParameters:parametersDic];
+    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(100, 100), CMTimeMake(300, 100))] forKey:SlVideoMixingAudioParameterTimeRangeOfAudioKey];
+    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(0, 100), CMTimeMake(500, 100))] forKey:SLVideoMixingAudioParameterTimeRangeOfVideoKey];
+    isMix = [_videoTool mixAudioWithParameters:parametersDic];
     
 //    if (isMix) {
 //        NSLog(@"混音成功");
 //    } else {
 //        NSLog(@"混音失败");
 //    }
-    
+
 //    [_videoTool runBackward];
 //    [_videoTool upendVideo];
 //    [_videoTool clipWithTimeRange:CMTimeRangeMake(CMTimeMake(1200, 600), CMTimeMake(1200, 500))];
@@ -92,6 +94,7 @@
     [self.view.layer addSublayer:playerLayer];
     [tmpPlayer play];
 }
+
 - (void)synthesisResult:(BOOL)result{
     if (result) {
         //新的视频文件编码完毕，写入相册。
@@ -109,6 +112,7 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"编码完毕" message:@"已写入系统相册" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
+
 - (PCMPlayer *)players{
     if (!_players) {
         _players = [[PCMPlayer alloc]init];
@@ -134,12 +138,5 @@
     
 
 }
-
-
-
-
-
-
-
 
 @end

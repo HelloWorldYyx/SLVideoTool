@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 enum SLVideoStatus_ {
     SLVideoStatusWaiting,
     SLVideoStatusPlaying,
@@ -103,18 +104,17 @@ extern  NSString * _Nonnull const SlVideoMixingAudioParameterTimeRangeOfAudioKey
 
 /**
  输出
-
  @param fileUrl 写入的地址
  */
 - (void)writerFile:(NSURL *)fileUrl;
 
 
-
 - (BOOL)spliceOperationSpliceAssetUrl:(NSURL *)spliceAssetUrl timeRange:(CMTimeRange)timeRange;
-
 - (void)spliceVideoWithArray:(NSArray *)arrayAssetFile type:(SLVideoTransitionType)type;
 //倒放
 - (void)runBackward;
 - (void)upendVideo;
 @end
 NS_ASSUME_NONNULL_END
+
+
