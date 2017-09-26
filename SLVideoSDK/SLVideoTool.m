@@ -7,6 +7,7 @@
 //
 
 #import "SLVideoTool.h"
+#import "OISamplebufferRef.h"
 
 NSString * const SLVideoMixingAudioParameterAudioAssetURLKey    = @"Audio asset URL";
 NSString * const SLVideoMixingAudioParameterVideoVolumeKey      = @"Video volume";
@@ -35,6 +36,11 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     NSDictionary *parametersDic_;
     CMTimeRange clipTimeRange_;
     
+        
+    NSMutableArray *reverseCacheBlocks_;
+    NSMutableArray *reverseCacheFramesCMtimes_;
+    NSInteger reverseBlockSize_;
+    
 }
 @end
 
@@ -46,6 +52,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
 @synthesize status = status_;
 @synthesize mainComposition = mainComposition_;
 @synthesize videoAudioMixTools = videoAudioMixTools_;
+@synthesize selectVideoComposition = selectVideoComposition_;
 @synthesize assetReader = assetReader_;
 
 - (instancetype)init{
@@ -61,6 +68,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
         _size              = CGSizeZero;
         isClip_            = NO;
         isMix_             = NO;
+
     }
     return self;
 }
@@ -69,6 +77,7 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     if (self = [super init]) {
         self.AVAsset = asset;
         originalAsset_ = asset;
+
     }
     return self;
 }
@@ -77,6 +86,9 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
     if (self = [super init]) {
         self.URL = URL;
         originalAsset_ = self.AVAsset;
+        reverseCacheBlocks_ = [[NSMutableArray alloc] init];
+        reverseCacheFramesCMtimes_ = [[NSMutableArray alloc] init];
+        reverseBlockSize_ = 1;
     }
     return self;
 }
@@ -249,13 +261,14 @@ NSString * const SlVideoMixingAudioParameterTimeRangeOfAudioKey = @"Time range o
 //                              audioStartTime:audioStartTime
 //                              audioRangeTime:audioTimeRange
 //                              vidioRangeTime:videoTimeRange];
-BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
-                               videoVolume:videoVolume
-                               audioVolume:audioVolume
-                            audioStartTime:audioStartTime
-                            audioRangeTime:audioTimeRange
-                            vidioRangeTime:videoTimeRange
-                            slowVolumeTime:CMTimeMake(200, 100)];
+
+    BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
+                                   videoVolume:videoVolume
+                                   audioVolume:audioVolume
+                                audioStartTime:audioStartTime
+                                audioRangeTime:audioTimeRange
+                                vidioRangeTime:videoTimeRange
+                                slowVolumeTime:CMTimeMake(300, 100)];
     return mixFinsh;
 
 }
@@ -834,7 +847,6 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
                 
                 
                 audioEndSecond = audioMixRangeSecond;
-                float endSecond = audioMixRangeSecond;
 
                 
             } else {
@@ -865,16 +877,139 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
         
         //视频操作指令集合
         selectVideoComposition_ = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:mainComposition_];
+//        selectVideoComposition_ = [AVMutableVideoComposition videoComposition];
+//        AVMutableVideoCompositionInstruction *videoInstruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+//        AVMutableVideoCompositionLayerInstruction *videoLayerIntruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:videoTrack];
+//        videoInstruction.layerInstructions = @[videoLayerIntruction];
+//        [videoLayerIntruction setOpacityRampFromStartOpacity:1.0 toEndOpacity:0 timeRange:CMTimeRangeMake(CMTimeMake(1200, 600), CMTimeMakeWithSeconds(2, 600))];
+//        selectVideoComposition_.instructions = @[videoInstruction];
+//
+//
         AVMutableVideoComposition *firstVcn = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:AVAsset_];
+        selectVideoComposition_.frameDuration = firstVcn.frameDuration;
         selectVideoComposition_.renderSize = firstVcn.renderSize;
+        
         self.AVAsset = mainComposition_;
+        
+        
+        
+        
         return YES;
         
     }
-    
+}
 
+#pragma  mark -倒放
+
+- (void)upendVideo{
+    
+    reverseBlockSize_ = 1;
+    dispatch_semaphore_t synSemaphoreLoadValues = dispatch_semaphore_create(0);
+    [AVAsset_ loadValuesAsynchronouslyForKeys:[NSArray arrayWithObject:@"tracks"] completionHandler:^{
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+           NSError *error = nil;
+           AVKeyValueStatus tracksStatus = [AVAsset_ statusOfValueForKey:@"tracks" error:&error];
+           if (tracksStatus != AVKeyValueStatusLoaded) {
+               //
+           }
+           dispatch_semaphore_signal(synSemaphoreLoadValues);
+           
+       });
+    }];
+    
+    double loadTrackBegin = [[NSDate date] timeIntervalSince1970];
+    dispatch_semaphore_wait(synSemaphoreLoadValues, DISPATCH_TIME_FOREVER);
+    double loadTrackEnd = [[NSDate date] timeIntervalSince1970];
+    NSLog(@"load track time consume ................ %.3f",(loadTrackEnd - loadTrackBegin) * 1000);
+    
+    mainComposition_ = [[AVMutableComposition alloc]init];
+    AVMutableCompositionTrack *compositionvVideoTrack = [mainComposition_ addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *compositionAudioTrack = [mainComposition_ addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    CMTime videoStartTime = kCMTimeZero;
+    
+    NSArray <AVAssetTrack *> *videoTrackers = [AVAsset_ tracksWithMediaType:AVMediaTypeVideo];
+    if (0 >= videoTrackers.count) {
+        NSLog(@"视频资源有错");
+        return ;
+    }
+    AVAssetTrack *videoTrack = [videoTrackers firstObject];
+    compositionvVideoTrack.preferredTransform = videoTrack.preferredTransform;
+    
+    float videoTimes = CMTimeGetSeconds(AVAsset_.duration);
+    
+    AVMutableVideoComposition *firstVcn = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:AVAsset_];
+    CMTime forceFrameDuration = firstVcn.frameDuration;
+    videoStartTime.timescale = forceFrameDuration.timescale;
+    
+    NSMutableArray <NSValue *> *framesRangeArray = [NSMutableArray array];
+    NSMutableArray <AVAssetTrack *> *frameTrackersArray = [NSMutableArray array];
+    
+    
+    CMTime videoReverseSingleStep = forceFrameDuration;
+    videoReverseSingleStep.value *= reverseBlockSize_; // 视频长了之后 AVMutableVideoComposition会造成内存爆炸, 把处理数加大,就不会了
+    
+    CMTime readTrackFrameStartTime = CMTimeSubtract(AVAsset_.duration, videoReverseSingleStep);
+    CMTime readTrackFrameLastTime = AVAsset_.duration;
+    NSError *error = nil;
+    for (;;) {
+        if (readTrackFrameStartTime.value <= 0.0) {
+            [framesRangeArray addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(kCMTimeZero,readTrackFrameLastTime)]];
+            [frameTrackersArray addObject:videoTrack];
+            break;
+        }
+        [framesRangeArray addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(readTrackFrameStartTime, videoReverseSingleStep)]];
+        [frameTrackersArray addObject:videoTrack];
+        
+        readTrackFrameLastTime = readTrackFrameStartTime;
+        readTrackFrameStartTime = CMTimeSubtract(readTrackFrameStartTime, videoReverseSingleStep);
+    }
+    [compositionvVideoTrack insertTimeRanges:framesRangeArray ofTracks:frameTrackersArray atTime:videoStartTime error:&error];
+    if (error) {
+        NSLog(@"error: %@ ",error);
+        return ;
+    }
+    NSArray <AVAssetTrack *> *audioTrackers = [AVAsset_ tracksWithMediaType:AVMediaTypeAudio];
+    if ( 0 >= audioTrackers.count) {
+        NSLog(@"这是一个无声视频");
+    } else {
+        [frameTrackersArray removeAllObjects];
+        [framesRangeArray removeAllObjects];
+        AVAssetTrack *audioTrack = [audioTrackers firstObject];
+        int audioTimeScale = audioTrack.naturalTimeScale;
+        CMTime audioDuration = CMTimeMake(videoTimes * audioTimeScale , audioTimeScale);
+        int singleAudioStep = audioTimeScale / (int)(1024.0f / audioTimeScale * 1000) * 2.0;
+        CMTime forceAudioDuration = CMTimeMake(singleAudioStep, audioTimeScale);
+        CMTime audioReverseSingleStep = forceAudioDuration;
+        CMTime readTrackAudioStartTime = CMTimeSubtract(audioDuration, audioReverseSingleStep);
+        CMTime readTrackAudioLastTiem = audioDuration;
+        for (; ; ) {
+            if (readTrackAudioStartTime.value <= 0.0) {
+                [framesRangeArray addObject: [NSValue valueWithCMTimeRange:CMTimeRangeMake(kCMTimeZero, readTrackAudioLastTiem)]];
+                [frameTrackersArray addObject:audioTrack];
+                break;
+            }
+            [framesRangeArray addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(readTrackAudioStartTime, audioReverseSingleStep)]];
+            [frameTrackersArray addObject:audioTrack];
+            
+            readTrackAudioLastTiem = readTrackAudioStartTime;
+            readTrackAudioStartTime = CMTimeSubtract(readTrackAudioStartTime, audioReverseSingleStep);
+        }
+        [compositionAudioTrack insertTimeRanges:framesRangeArray ofTracks:frameTrackersArray atTime:kCMTimeZero error:&error];
+        if (error) {
+            NSLog(@"erro:%@",error);
+            return;
+        }
+    }
+    [framesRangeArray removeAllObjects];
+    [frameTrackersArray removeAllObjects];
+    
+    selectVideoComposition_ = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:mainComposition_];
+    selectVideoComposition_.renderSize = firstVcn.renderSize;
+    videoAudioMixTools_ = [AVMutableAudioMix audioMix];
     
 }
+
 
 #pragma mark - 初始化AVassetReader
 //初始化AVAssetReader
@@ -889,12 +1024,14 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
         NSDictionary *outputSettings = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCVPixelFormatType_32BGRA)};
         AVAssetReaderVideoCompositionOutput *readerVideoOutput = [AVAssetReaderVideoCompositionOutput assetReaderVideoCompositionOutputWithVideoTracks:[mainComposition_ tracksWithMediaType:AVMediaTypeVideo]
                                                                                                                                          videoSettings:outputSettings];
+        
 #if ! TARGET_IPHONE_SIMULATOR
         //在模拟机调试的时候
         if( [AVVideoComposition isKindOfClass:[AVMutableVideoComposition class]] )
             [(AVMutableVideoComposition*)selectVideoComposition_ setRenderScale:1.0];
 #endif
         readerVideoOutput.videoComposition = selectVideoComposition_;
+        
         readerVideoOutput.alwaysCopiesSampleData = NO;
         if ([assetReader_ canAddOutput:readerVideoOutput]) {
             [assetReader_ addOutput:readerVideoOutput];
@@ -921,8 +1058,7 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
         
         videoTrackOutput_ = (AVAssetReaderTrackOutput *)readerVideoOutput;
         audioTrackOutput_ = (AVAssetReaderTrackOutput *)readerAudioOutput;
-    }
-    else {
+    }  else {
         NSError *error;
         AVAssetReader *assetReader = [[AVAssetReader alloc] initWithAsset:self.AVAsset error:&error];
         if (error) {
@@ -1032,6 +1168,7 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
  @return 返回编码字典
  */
 - (NSDictionary *)configVideoInput{
+    //@{AVVideoAverageBitRateKey : [NSNumber numberWithDouble:3.0 * 1024.0 * 1024.0]};
     NSDictionary *videoInputSetting = @{
                                         AVVideoCodecKey:AVVideoCodecH264,
                                         AVVideoWidthKey: @(374),
@@ -1056,13 +1193,18 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     dispatch_queue_t rwAudioSerializationQueue = dispatch_queue_create("Audio Queue", DISPATCH_QUEUE_SERIAL);
     dispatch_queue_t rwVideoSerializationQueue = dispatch_queue_create("Video Queue", DISPATCH_QUEUE_SERIAL);
     dispatch_group_t dispatchGroup = dispatch_group_create();
+
+    BOOL isReadingSuccess = [assetReader startReading];
+    BOOL isWritingSuccess = [assetWriter startWriting];
+    NSLog(@"==>%ld",assetReader.status);
     
-    [assetReader startReading];
-    [assetWriter startWriting];
-    
+    if (!isReadingSuccess || !isWritingSuccess) {
+        NSLog(@"写入失败");
+        return;
+    }
+   
     //这里开始时间是可以自己设置的
-    [assetWriter startSessionAtSourceTime:CMTimeMake(10, 100)];
-    
+    [assetWriter startSessionAtSourceTime:kCMTimeZero];
 
     __weak __typeof(&*self) weakSelf = self;
     dispatch_group_enter(dispatchGroup);
@@ -1072,6 +1214,7 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
         while ([assetWriterAudioInput isReadyForMoreMediaData]&&assetReader.status == AVAssetReaderStatusReading) {
             CMSampleBufferRef nextSampleBuffer = [audioTrackOutput_ copyNextSampleBuffer];
             [weakSelf.delegate copyAudioSampleBufferRef:nextSampleBuffer];
+            
             
             if (isAudioFirst) {
                 isAudioFirst = !isAudioFirst;
@@ -1093,26 +1236,49 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     dispatch_group_enter(dispatchGroup);
     __block BOOL isVideoFirst = YES;
     [assetWriterVideoInput requestMediaDataWhenReadyOnQueue:rwVideoSerializationQueue usingBlock:^{
-        
+        NSLog(@"%ld",assetReader.status);
         while ([assetWriterVideoInput isReadyForMoreMediaData]&&assetReader.status == AVAssetReaderStatusReading) {
             
             CMSampleBufferRef nextSampleBuffer = [videoTrackOutput_ copyNextSampleBuffer];
+            
             if (isVideoFirst) {
                 isVideoFirst = !isVideoFirst;
                 continue;
             }
-            if (nextSampleBuffer) {
-                [assetWriterVideoInput appendSampleBuffer:nextSampleBuffer];
-                CFRelease(nextSampleBuffer);
-//                NSLog(@"加载");
-            } else {
-                [assetWriterVideoInput markAsFinished];
-                dispatch_group_leave(dispatchGroup);
-                break;
+      
+            if (reverseCacheBlocks_.count >= reverseBlockSize_) {
+                
+                //开始倒叙
+                NSUInteger cacheBuffersCound = reverseCacheBlocks_.count;
+                @autoreleasepool {
+                    for (int m = 0; m < reverseCacheBlocks_.count; m++) {
+                        OISamplebufferRef *reverseBuffer = [reverseCacheBlocks_ objectAtIndex:cacheBuffersCound - 1 - m];
+                        CMTime bufferInputTime;
+                        [[reverseCacheFramesCMtimes_ objectAtIndex:m] getValue:&bufferInputTime];
+                        if (reverseBuffer.sampleBuffer) {
+                            [assetWriterVideoInput appendSampleBuffer:reverseBuffer.sampleBuffer];
+                            NSLog(@"%f",CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(reverseBuffer.sampleBuffer)));
+                            CFRelease(reverseBuffer.sampleBuffer);
+                            
+                        }
+                    }
+                }
+                if (!nextSampleBuffer) {
+                    [assetWriterVideoInput markAsFinished];
+                    dispatch_group_leave(dispatchGroup);
+                    break;
+                }
+                [reverseCacheBlocks_ removeAllObjects];
+                [reverseCacheFramesCMtimes_ removeAllObjects];
             }
+            
+            OISamplebufferRef *reverseBuffer = [[OISamplebufferRef alloc] init];
+            reverseBuffer.sampleBuffer = nextSampleBuffer;
+            [reverseCacheBlocks_ addObject:reverseBuffer];
+            [reverseCacheFramesCMtimes_ addObject:[NSValue valueWithCMTime:CMSampleBufferGetPresentationTimeStamp(nextSampleBuffer)]];
         }
     }];
-    
+    NSLog(@"%ld",assetWriter.status);
     dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^{
         [assetWriter finishWritingWithCompletionHandler:^{
             BOOL isFinsh;
@@ -1125,12 +1291,14 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
                 NSLog(@"加载失败");
             }
             if ([weakSelf.delegate respondsToSelector:@selector(synthesisResult:)]) {
-//                [weakSelf.delegate synthesisResult:isFinsh];
+                [weakSelf.delegate synthesisResult:isFinsh];
             }
         }];
     });
 }
-
+- (void)executeMoviewWrite:(CMSampleBufferRef )sampleBuffer{
+    
+}
 
 
 #pragma  mark - 拼接
@@ -1142,6 +1310,10 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     if (mainComposition_) {
         
     } else {
+        
+    }
+    //两个时间比较 可以这样来判断这个时间是否是无效时间
+    if (CMTIME_COMPARE_INLINE(kCMTimeZero, !=, kCMTimeInvalid)) {
         
     }
     
@@ -1206,7 +1378,6 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     AVMutableVideoComposition *select_videoComposition = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:mainComposition];
     
     NSArray<AVMutableVideoCompositionInstruction *> *videocomIns = select_videoComposition.instructions;
-    
     //调整LayerStack的ConstantAffineMatrix
     AVMutableVideoComposition *first_vcn = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:selectAsset];
     AVMutableVideoComposition *second_vcn = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:mixAsset];
@@ -1292,7 +1463,7 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     
     //            [compositionVideoTrack insertTimeRange:clipRange ofTrack:video_track atTime:kCMTimeZero error:&error];
     
-    for(int i = 0; ;){
+    for(; ;){
         
         [framesRangeArray addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(readTrackFrameStartTime, forceFrameDuration)]];
         [framesTrackersArray addObject:video_track];
@@ -1335,7 +1506,7 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     
     [framesRangeArray removeAllObjects];
     [framesTrackersArray removeAllObjects];
-    for(int i = 0; ;){
+    for(; ;){
         
         [framesRangeArray addObject:[NSValue valueWithCMTimeRange:CMTimeRangeMake(readTrackAudioStartTime, forceAudioDuration)]];
         [framesTrackersArray addObject:audio_track];
@@ -1417,6 +1588,174 @@ BOOL mixFinsh = [self YXmixAudioAssetAtURL:asssetURL
     return videoLayerIns;
 }
 
+
+- (void)spliceVideoWithArray:(NSArray *)arrayAssetFile type:(SLVideoTransitionType)type{
+    
+    NSMutableArray *arrayAsset = [NSMutableArray array];
+    for (NSString *file in arrayAssetFile) {
+        AVURLAsset *asset = [AVURLAsset assetWithURL:[NSURL fileURLWithPath:file]];
+        [arrayAsset addObject:asset];
+    }
+    AVMutableComposition *composition = [AVMutableComposition composition];
+    AVMutableCompositionTrack *trackVideoA = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *trackVideoB = [composition addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
+    NSArray *videoTracks = @[trackVideoA, trackVideoB];
+    
+    AVMutableCompositionTrack *trackAudioA = [composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    AVMutableCompositionTrack *trackAudioB = [composition addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
+    NSArray *audioTracks = @[trackAudioA,trackAudioB];
+    
+    
+    NSMutableArray *videoAssets = (NSMutableArray *)arrayAsset;
+    CMTime cursorTime = kCMTimeZero;
+    CMTime transitionDuration = CMTimeMakeWithSeconds(2, 600);
+    for (NSUInteger i = 0; i < videoAssets.count; i++) {
+        NSUInteger  trackIndex  = i % 2;
+        AVMutableCompositionTrack *currenTrack = videoTracks[trackIndex];
+        AVAsset *asset  = videoAssets[i];
+        NSArray <AVAssetTrack *> *arrayTrack = [asset tracksWithMediaType:AVMediaTypeVideo];
+        if (arrayTrack.count <= 0) {
+            return;
+        }
+        AVAssetTrack *assetTrack = [arrayTrack firstObject];
+        CMTimeRange timeRange = CMTimeRangeMake(kCMTimeZero, asset.duration);
+        [currenTrack insertTimeRange:timeRange
+                             ofTrack:assetTrack
+                              atTime:cursorTime
+                               error:nil];
+        
+        AVMutableCompositionTrack *currenAudioTrack = audioTracks[trackIndex];
+        NSArray <AVAssetTrack *> *arrayAudioTrack = [asset tracksWithMediaType:AVMediaTypeAudio];
+        if (arrayTrack.count > 0) {
+            AVAssetTrack *assetAudioTrack = [arrayAudioTrack firstObject];
+            [currenAudioTrack insertTimeRange:timeRange
+                                 ofTrack:assetAudioTrack
+                                       atTime:cursorTime
+                                        error:nil];
+        }
+        cursorTime = CMTimeAdd(cursorTime, timeRange.duration);
+        cursorTime = CMTimeSubtract(cursorTime, transitionDuration);
+    }
+    
+    
+    //获取过渡和通过时间
+    CMTime cursorTime1 = kCMTimeZero;
+    NSMutableArray *passThroughTimeRanges = [NSMutableArray array];
+    NSMutableArray *transitionTimeRnages  = [NSMutableArray array];
+    
+    NSUInteger videoCount = videoAssets.count;
+    for (NSUInteger i = 0; i < videoCount; i++) {
+        AVAsset *asset = videoAssets[i];
+        CMTimeRange timeRange = CMTimeRangeMake(cursorTime1, asset.duration);
+        if (i > 0) {
+            timeRange.start = CMTimeAdd(timeRange.start, transitionDuration);
+            timeRange.duration = CMTimeSubtract(timeRange.duration, transitionDuration);
+        }
+        if (i+1 < videoCount) {
+            timeRange.duration  = CMTimeSubtract(timeRange.duration, transitionDuration);
+        }
+        [passThroughTimeRanges addObject:[NSValue valueWithCMTimeRange:timeRange]];
+        
+        cursorTime1 = CMTimeAdd(cursorTime1, asset.duration);
+        cursorTime1 = CMTimeSubtract(cursorTime1, transitionDuration);
+        if (i+1 < videoCount) {
+            timeRange = CMTimeRangeMake(cursorTime1, transitionDuration);
+            NSValue *timeRangeValue = [NSValue valueWithCMTimeRange:timeRange];
+            [transitionTimeRnages addObject:timeRangeValue];
+        }
+        
+    }
+    
+    //穿件组合 和 层指令
+    NSMutableArray *compositionInstructions = [NSMutableArray array];
+    NSArray *tracks = [composition tracksWithMediaType:AVMediaTypeVideo];
+    for (int i = 0; i< passThroughTimeRanges.count; i++) {
+        NSUInteger trackIndex = i % 2;
+        AVMutableCompositionTrack *currentTrack = tracks[trackIndex];
+        AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+        instruction.timeRange = [passThroughTimeRanges[i] CMTimeRangeValue];
+        AVMutableVideoCompositionLayerInstruction *layerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:currentTrack];
+        
+        instruction.layerInstructions = @[layerInstruction];
+        [compositionInstructions addObject:instruction];
+        if (i < transitionTimeRnages.count) {
+            AVCompositionTrack *foregroundTrack = tracks[trackIndex];
+            AVCompositionTrack *backgroundTrack = tracks[1 - trackIndex];
+            AVMutableVideoCompositionInstruction *instruction = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+            CMTimeRange timeRange = [transitionTimeRnages[i] CMTimeRangeValue];
+        
+            instruction.timeRange = timeRange;
+            AVMutableVideoCompositionLayerInstruction *fromlayerinstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:foregroundTrack];
+            AVMutableVideoCompositionLayerInstruction *tolayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:backgroundTrack];
+            if (type == SLVideoTransitionTypeDissolve) {
+                [fromlayerinstruction setOpacityRampFromStartOpacity:1.0
+                                                        toEndOpacity:0.0
+                                                           timeRange:timeRange];
+                
+                [tolayerInstruction setOpacityRampFromStartOpacity:0.0
+                                                      toEndOpacity:1.0
+                                                         timeRange:timeRange];
+            } else if (type == SLVideoTransitionTypePush) {
+                CGAffineTransform identityTransform = CGAffineTransformIdentity;
+                CGFloat videoWidth = CGSizeMake(1080.0f, 1440.0f).width;
+                CGAffineTransform fromDestTransform = CGAffineTransformMakeTranslation(-videoWidth, 0.0);
+                CGAffineTransform toStartTransform  = CGAffineTransformMakeTranslation(videoWidth, 0.0);
+                [fromlayerinstruction setTransformRampFromStartTransform:identityTransform
+                                                          toEndTransform:fromDestTransform
+                                                               timeRange:timeRange];
+                [tolayerInstruction setTransformRampFromStartTransform:toStartTransform
+                                                        toEndTransform:identityTransform
+                                                             timeRange:timeRange];
+            } else if (type == SLVideoTransitionTypeWipe) {
+                CGFloat videoWidth  = CGSizeMake(1080.0f, 1440.0f).width;
+                CGFloat videoHeight = CGSizeMake(1080.0f, 1440.0f).height;
+                
+                CGRect startRect = CGRectMake(0.0f, 0.0f, videoWidth, videoHeight);
+                CGRect endRect   = CGRectMake(0.0f, videoHeight, videoWidth, videoHeight);
+                
+                [fromlayerinstruction setCropRectangleRampFromStartCropRectangle:startRect
+                                                              toEndCropRectangle:endRect
+                                                                       timeRange:timeRange];
+                [tolayerInstruction setCropRectangleRampFromStartCropRectangle:endRect
+                                                            toEndCropRectangle:startRect
+                                                                     timeRange:timeRange];
+                
+            } else {
+                
+            }
+            
+            //音频设置声音的转换
+            AVMutableCompositionTrack *foregroundAudioTrack = audioTracks[trackIndex];
+            AVMutableAudioMixInputParameters *foregroundAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:foregroundAudioTrack];
+            [foregroundAudioMixInputParameters setVolumeRampFromStartVolume:1.0f toEndVolume:0.0f timeRange:timeRange];
+            
+            AVMutableCompositionTrack *backgroundAudioTrack = audioTracks[1 - trackIndex];
+            AVMutableAudioMixInputParameters *backgroundAudioMixInputParameters = [AVMutableAudioMixInputParameters audioMixInputParametersWithTrack:backgroundAudioTrack];
+            
+            [backgroundAudioMixInputParameters setVolumeRampFromStartVolume:0.0f toEndVolume:1.0f timeRange:timeRange];
+            
+            instruction.layerInstructions = @[fromlayerinstruction,tolayerInstruction];
+            [compositionInstructions addObject:instruction];
+        }
+    }
+    
+    
+    //配置声音
+    
+    
+    //配置AVvideoComposition
+    AVMutableVideoComposition *videoComposition = [AVMutableVideoComposition videoComposition];
+    videoComposition.instructions = compositionInstructions;
+    videoComposition.renderSize = CGSizeMake(1080.0f, 1440.0f);
+    videoComposition.frameDuration = CMTimeMake(1, 30);
+    videoComposition.renderScale = 1.0f;
+    
+    selectVideoComposition_ = videoComposition;
+    videoAudioMixTools_ = [AVMutableAudioMix audioMix];
+    mainComposition_ = composition;
+    
+    
+}
 #pragma mark - 输出
 - (void)writerFile:(NSURL *)fileUrl {
     [self initializeAssetReader];

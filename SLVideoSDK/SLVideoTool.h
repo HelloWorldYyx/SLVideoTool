@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 enum SLVideoStatus_ {
     SLVideoStatusWaiting,
     SLVideoStatusPlaying,
@@ -24,6 +26,12 @@ typedef enum SLVideoOrientation_ {
     SLVideoOrientationLandscapeLeft       ,
     SLvideoOrientationLandscapeRight      ,
 } SLVideoOrientation;
+
+typedef enum SLVideoTransitionType{
+    SLVideoTransitionTypeDissolve         ,
+    SLVideoTransitionTypePush             ,
+    SLVideoTransitionTypeWipe             ,
+} SLVideoTransitionType;
 
 extern  NSString * _Nonnull const SLVideoMixingAudioParameterAudioAssetURLKey;
 extern  NSString * _Nonnull const SLVideoMixingAudioParameterVideoVolumeKey;
@@ -74,6 +82,7 @@ extern  NSString * _Nonnull const SlVideoMixingAudioParameterTimeRangeOfAudioKey
 
 @property (nonatomic, strong) AVMutableComposition *mainComposition;
 @property (nonatomic, strong) AVMutableAudioMix *videoAudioMixTools;
+@property (nonatomic, strong) AVMutableVideoComposition *selectVideoComposition;
 
 @property (nonatomic, strong) AVAssetReader *assetReader;
 
@@ -101,7 +110,11 @@ extern  NSString * _Nonnull const SlVideoMixingAudioParameterTimeRangeOfAudioKey
 
 
 
-- (void)spliceVideoWithURl:(NSURL *)url spliceVideoTimeRange:(CMTimeRange)splicevideoTimeRange;
 - (BOOL)spliceOperationSpliceAssetUrl:(NSURL *)spliceAssetUrl timeRange:(CMTimeRange)timeRange;
+
+- (void)spliceVideoWithArray:(NSArray *)arrayAssetFile type:(SLVideoTransitionType)type;
+//倒放
 - (void)runBackward;
+- (void)upendVideo;
 @end
+NS_ASSUME_NONNULL_END

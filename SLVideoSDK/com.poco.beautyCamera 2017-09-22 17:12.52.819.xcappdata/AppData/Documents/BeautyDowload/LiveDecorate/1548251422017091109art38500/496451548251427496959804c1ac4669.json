@@ -1,0 +1,21 @@
+{
+  "frames": [
+    {
+      "filename": "shoulder0000",
+      "d": 3.0,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 240,
+        "h": 74
+      }
+    }
+  ],
+  "meta": {
+    "image": "y726shoulder.png",
+    "size": {
+      "w": 245,
+      "h": 78
+    }
+  }
+}

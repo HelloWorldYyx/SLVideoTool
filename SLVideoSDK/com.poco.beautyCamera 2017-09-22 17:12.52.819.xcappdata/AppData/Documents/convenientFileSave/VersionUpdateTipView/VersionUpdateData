@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>details</key>
+	<dict>
+		<key>is_show</key>
+		<integer>0</integer>
+		<key>val</key>
+		<array>
+			<string>全新特效滤镜，变美有腔调!</string>
+			<string>趣萌贴纸有惊喜，戳拍照体验哦~</string>
+			<string>优化细节体验，拍照修图更流畅！</string>
+			<string>优化底层算法，美颜更加清晰自然！</string>
+			<string>修复已知bug，一键更新完美包~</string>
+		</array>
+	</dict>
+	<key>details_url_btn</key>
+	<dict>
+		<key>is_show</key>
+		<integer>0</integer>
+		<key>name</key>
+		<string></string>
+		<key>val</key>
+		<string>http://cav.adnonstop.com/cav/f52ca28d17/0050402824/?url=https://wap-ios.adnonstop.com/topic/beauty_camera/index.php?type=IOS&amp;version=4.0.8</string>
+	</dict>
+	<key>download_url_btn</key>
+	<dict>
+		<key>is_show</key>
+		<integer>0</integer>
+		<key>name</key>
+		<string></string>
+		<key>val</key>
+		<string>http://cav.adnonstop.com/cav/ac0c5699c0/0050402399/?url=https://itunes.apple.com/cn/app/id471802217</string>
+	</dict>
+	<key>is_ignore</key>
+	<dict>
+		<key>is_show</key>
+		<integer>0</integer>
+		<key>name</key>
+		<string></string>
+	</dict>
+	<key>pop_version</key>
+	<integer>201611101543</integer>
+	<key>title</key>
+	<dict>
+		<key>is_show</key>
+		<integer>1</integer>
+		<key>val</key>
+		<string>不需要更新</string>
+	</dict>
+	<key>update_type</key>
+	<integer>0</integer>
+	<key>version</key>
+	<dict>
+		<key>is_show</key>
+		<integer>0</integer>
+		<key>val</key>
+		<string>4.0.2</string>
+	</dict>
+</dict>
+</plist>

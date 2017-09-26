@@ -7,10 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840A5CFE1F74F2B300898BEE /* IMG_1209.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84090F531F4452F300266784 /* IMG_1209.mp4 */; };
+		840A5CFF1F74F2B300898BEE /* IMG_1222.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84090F541F4452FA00266784 /* IMG_1222.mp4 */; };
 		842F9D1A1F03A9B7007E133E /* sc-18.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 842F9D191F03A9B7007E133E /* sc-18.mp4 */; };
 		842F9D1B1F03A9CC007E133E /* 123.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 842F9D151F03A970007E133E /* 123.mp4 */; };
 		842F9D1C1F03A9D0007E133E /* 不要说话.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 842F9D161F03A972007E133E /* 不要说话.mp3 */; };
+		843935BB1F78B55F004F4D64 /* a.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 843935B91F78B55F004F4D64 /* a.m4v */; };
+		843935BC1F78B55F004F4D64 /* b.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 843935BA1F78B55F004F4D64 /* b.m4v */; };
+		843935BE1F78B564004F4D64 /* c.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 843935BD1F78B564004F4D64 /* c.m4v */; };
+		843B44D31F58FCCB00888B04 /* OISamplebufferRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 843B44D21F58FCCB00888B04 /* OISamplebufferRef.m */; };
+		843B44D51F59317000888B04 /* 789.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 843B44D41F59317000888B04 /* 789.mp4 */; };
+		843B44D71F5932C900888B04 /* 456.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 843B44D61F5932C900888B04 /* 456.m4v */; };
 		844891A81F2F029F00F78244 /* PCMPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 844891A71F2F029F00F78244 /* PCMPlayer.m */; };
+		844D37611F74B2840086CFA3 /* jointVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 844D37601F74B2840086CFA3 /* jointVideo.m */; };
 		847063441F05F05200007209 /* cf.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 847063431F05EFF500007209 /* cf.mp4 */; };
 		84760ABC1F01F65900D2D70A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ABB1F01F65900D2D70A /* main.m */; };
 		84760ABF1F01F65900D2D70A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ABE1F01F65900D2D70A /* AppDelegate.m */; };
@@ -22,6 +31,7 @@
 		84760AE01F01F65900D2D70A /* SLVideoSDKUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */; };
 		84760AEF1F01F6DF00D2D70A /* SLVideoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */; };
 		84CA04431F287C6900D4689D /* 五环之歌.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 840B1E7E1F273DA500C824C8 /* 五环之歌.mp3 */; };
+		84CC78B01F43F32800EEABC9 /* 234.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 84CC78AF1F43F32800EEABC9 /* 234.mp4 */; };
 		84FAF6671F1DBC0600556508 /* IMG_2280.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 84FAF6641F1DBBF600556508 /* IMG_2280.m4v */; };
 		84FAF6681F1DBC0600556508 /* IMG_2283.MOV in Resources */ = {isa = PBXBuildFile; fileRef = 84FAF6651F1DBBF600556508 /* IMG_2283.MOV */; };
 		84FAF6691F1DBC0600556508 /* IMG_6820.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 84FAF6661F1DBBF600556508 /* IMG_6820.MP4 */; };
@@ -45,13 +55,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84090F531F4452F300266784 /* IMG_1209.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_1209.mp4; sourceTree = "<group>"; };
+		84090F541F4452FA00266784 /* IMG_1222.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_1222.mp4; sourceTree = "<group>"; };
 		840B1E7E1F273DA500C824C8 /* 五环之歌.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "五环之歌.mp3"; sourceTree = "<group>"; };
 		842F9D151F03A970007E133E /* 123.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 123.mp4; sourceTree = "<group>"; };
 		842F9D161F03A972007E133E /* 不要说话.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "不要说话.mp3"; sourceTree = "<group>"; };
 		842F9D191F03A9B7007E133E /* sc-18.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "sc-18.mp4"; path = "../../../../Downloads/sc-18.mp4"; sourceTree = "<group>"; };
+		843935B91F78B55F004F4D64 /* a.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = a.m4v; sourceTree = "<group>"; };
+		843935BA1F78B55F004F4D64 /* b.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = b.m4v; sourceTree = "<group>"; };
+		843935BD1F78B564004F4D64 /* c.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = c.m4v; sourceTree = "<group>"; };
+		843B44D11F58FCCB00888B04 /* OISamplebufferRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OISamplebufferRef.h; sourceTree = "<group>"; };
+		843B44D21F58FCCB00888B04 /* OISamplebufferRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OISamplebufferRef.m; sourceTree = "<group>"; };
+		843B44D41F59317000888B04 /* 789.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 789.mp4; sourceTree = "<group>"; };
+		843B44D61F5932C900888B04 /* 456.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = 456.m4v; sourceTree = "<group>"; };
 		84434C381F28780700A4C868 /* SLVideoTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLVideoTool.h; sourceTree = "<group>"; };
 		844891A61F2F029F00F78244 /* PCMPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMPlayer.h; sourceTree = "<group>"; };
 		844891A71F2F029F00F78244 /* PCMPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMPlayer.m; sourceTree = "<group>"; };
+		844D375F1F74B2840086CFA3 /* jointVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jointVideo.h; sourceTree = "<group>"; };
+		844D37601F74B2840086CFA3 /* jointVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jointVideo.m; sourceTree = "<group>"; };
 		847063431F05EFF500007209 /* cf.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cf.mp4; sourceTree = "<group>"; };
 		84760AB71F01F65900D2D70A /* SLVideoSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLVideoSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84760ABB1F01F65900D2D70A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,6 +91,7 @@
 		84760ADF1F01F65900D2D70A /* SLVideoSDKUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SLVideoSDKUITests.m; sourceTree = "<group>"; };
 		84760AE11F01F65900D2D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLVideoTool.m; sourceTree = "<group>"; };
+		84CC78AF1F43F32800EEABC9 /* 234.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = 234.mp4; path = "../../../../Library/Developer/CoreSimulator/Devices/03DEFCCD-D4F6-4D2C-BAE8-0EF5DA13EFB8/data/Containers/Data/Application/484C3E64-AAB1-41D5-B08E-20F397C76DAF/Documents/234.mp4"; sourceTree = "<group>"; };
 		84FAF6641F1DBBF600556508 /* IMG_2280.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_2280.m4v; sourceTree = "<group>"; };
 		84FAF6651F1DBBF600556508 /* IMG_2283.MOV */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = IMG_2283.MOV; sourceTree = "<group>"; };
 		84FAF6661F1DBBF600556508 /* IMG_6820.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_6820.MP4; sourceTree = "<group>"; };
@@ -123,6 +145,14 @@
 		84760AB91F01F65900D2D70A /* SLVideoSDK */ = {
 			isa = PBXGroup;
 			children = (
+				843935B91F78B55F004F4D64 /* a.m4v */,
+				843935BA1F78B55F004F4D64 /* b.m4v */,
+				843935BD1F78B564004F4D64 /* c.m4v */,
+				843B44D41F59317000888B04 /* 789.mp4 */,
+				84CC78AF1F43F32800EEABC9 /* 234.mp4 */,
+				84090F531F4452F300266784 /* IMG_1209.mp4 */,
+				84090F541F4452FA00266784 /* IMG_1222.mp4 */,
+				843B44D61F5932C900888B04 /* 456.m4v */,
 				84FAF6641F1DBBF600556508 /* IMG_2280.m4v */,
 				84FAF6651F1DBBF600556508 /* IMG_2283.MOV */,
 				84FAF6661F1DBBF600556508 /* IMG_6820.MP4 */,
@@ -139,6 +169,10 @@
 				844891A71F2F029F00F78244 /* PCMPlayer.m */,
 				84434C381F28780700A4C868 /* SLVideoTool.h */,
 				84760AEE1F01F6DF00D2D70A /* SLVideoTool.m */,
+				844D375F1F74B2840086CFA3 /* jointVideo.h */,
+				844D37601F74B2840086CFA3 /* jointVideo.m */,
+				843B44D11F58FCCB00888B04 /* OISamplebufferRef.h */,
+				843B44D21F58FCCB00888B04 /* OISamplebufferRef.m */,
 				84760AC31F01F65900D2D70A /* Main.storyboard */,
 				84760AC61F01F65900D2D70A /* Assets.xcassets */,
 				84760AC81F01F65900D2D70A /* LaunchScreen.storyboard */,
@@ -283,12 +317,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840A5CFE1F74F2B300898BEE /* IMG_1209.mp4 in Resources */,
+				840A5CFF1F74F2B300898BEE /* IMG_1222.mp4 in Resources */,
+				843935BE1F78B564004F4D64 /* c.m4v in Resources */,
 				84CA04431F287C6900D4689D /* 五环之歌.mp3 in Resources */,
+				843B44D51F59317000888B04 /* 789.mp4 in Resources */,
 				84FAF6671F1DBC0600556508 /* IMG_2280.m4v in Resources */,
 				84FAF6681F1DBC0600556508 /* IMG_2283.MOV in Resources */,
 				84FAF6691F1DBC0600556508 /* IMG_6820.MP4 in Resources */,
+				84CC78B01F43F32800EEABC9 /* 234.mp4 in Resources */,
+				843B44D71F5932C900888B04 /* 456.m4v in Resources */,
+				843935BB1F78B55F004F4D64 /* a.m4v in Resources */,
 				847063441F05F05200007209 /* cf.mp4 in Resources */,
 				842F9D1C1F03A9D0007E133E /* 不要说话.mp3 in Resources */,
+				843935BC1F78B55F004F4D64 /* b.m4v in Resources */,
 				842F9D1B1F03A9CC007E133E /* 123.mp4 in Resources */,
 				842F9D1A1F03A9B7007E133E /* sc-18.mp4 in Resources */,
 				84760ACA1F01F65900D2D70A /* LaunchScreen.storyboard in Resources */,
@@ -318,7 +360,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844D37611F74B2840086CFA3 /* jointVideo.m in Sources */,
 				844891A81F2F029F00F78244 /* PCMPlayer.m in Sources */,
+				843B44D31F58FCCB00888B04 /* OISamplebufferRef.m in Sources */,
 				84760AEF1F01F6DF00D2D70A /* SLVideoTool.m in Sources */,
 				84760AC21F01F65900D2D70A /* ViewController.m in Sources */,
 				84760ABF1F01F65900D2D70A /* AppDelegate.m in Sources */,

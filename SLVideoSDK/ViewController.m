@@ -10,6 +10,7 @@
 #import "SLVideoTool.h"
 #import <AVFoundation/AVFoundation.h>
 #import "PCMPlayer.h"
+#import "jointVideo.h"
 
 @interface ViewController ()<SLVideoToolDelegate>
 @property (nonatomic,strong) SLVideoTool *videoTool;
@@ -27,18 +28,19 @@
     [super viewDidLoad];
     NSURL *audioInpitUrl2 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"五环之歌" ofType:@"mp3"]];
     // 视频来源
-    NSURL *videoInputUrl = [[NSBundle mainBundle] URLForResource:@"IMG_2283" withExtension:@"MOV"];
+    NSURL *videoInputUrl = [[NSBundle mainBundle] URLForResource:@"789" withExtension:@"mp4"];
     _videoTool = [[SLVideoTool alloc]initWithURL:videoInputUrl];
     _videoTool.delegate = self;
+
     BOOL isMix;
     NSMutableDictionary *parametersDic = [NSMutableDictionary dictionary];
     [parametersDic setObject:audioInpitUrl2 forKey:SLVideoMixingAudioParameterAudioAssetURLKey];
     [parametersDic setObject:@"0" forKey:SLVideoMixingAudioParameterVideoVolumeKey];
     [parametersDic setObject:@"1" forKey:SLVideoMixingAudioParameterAudioVolumeKey];
     [parametersDic setValue:[NSValue valueWithCMTime:CMTimeMake(100, 100)] forKey:SLVideoMixingAudioParameterAudioStartTimeKey];
-    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(100, 100), CMTimeMake(300, 100))] forKey:SlVideoMixingAudioParameterTimeRangeOfAudioKey];
-    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(0, 100), CMTimeMake(500, 100))] forKey:SLVideoMixingAudioParameterTimeRangeOfVideoKey];
-    isMix = [_videoTool mixAudioWithParameters:parametersDic];
+    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(100, 100), CMTimeMake(500, 100))] forKey:SlVideoMixingAudioParameterTimeRangeOfAudioKey];
+    [parametersDic setValue:[NSValue valueWithCMTimeRange:CMTimeRangeMake(CMTimeMake(0, 100), CMTimeMake(5000, 100))] forKey:SLVideoMixingAudioParameterTimeRangeOfVideoKey];
+//    isMix = [_videoTool mixAudioWithParameters:parametersDic];
     
 //    if (isMix) {
 //        NSLog(@"混音成功");
@@ -46,28 +48,47 @@
 //        NSLog(@"混音失败");
 //    }
     
-    [_videoTool runBackward];
-    [self adfasd];
+//    [_videoTool runBackward];
+//    [_videoTool upendVideo];
+//    [_videoTool clipWithTimeRange:CMTimeRangeMake(CMTimeMake(1200, 600), CMTimeMake(1200, 500))];
+//    [self adfasd];
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *videoFileName = @"TempVideo.mp4";
     NSString *targetPath = [documentPath stringByAppendingPathComponent:videoFileName];
     NSFileManager *filrManage = [NSFileManager defaultManager];
     [filrManage removeItemAtPath:targetPath error:nil];
     NSLog(@"==>%@",targetPath);
+
+    
+//    jointVideo *spliceTool = [[jointVideo alloc] init];
+    NSMutableArray *arrayFile = [NSMutableArray array];
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"a" ofType:@"m4v"]];
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"b" ofType:@"m4v"]];
+    
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"c" ofType:@"m4v"]];
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"a" ofType:@"m4v"]];
+    
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"b" ofType:@"m4v"]];
+    [arrayFile addObject:[[NSBundle mainBundle] pathForResource:@"c" ofType:@"m4v"]];
+    
+    
+    [_videoTool spliceVideoWithArray:arrayFile type:SLVideoTransitionTypePush];
+    
+    
+    [self adfasdWithComposition:_videoTool.mainComposition audioMix:_videoTool.videoAudioMixTools videoCompositon:_videoTool.selectVideoComposition];
     [_videoTool writerFile:[NSURL fileURLWithPath:targetPath]];
+    
 }
 
-
-
-
-
-- (void)adfasd{
-    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:_videoTool.mainComposition];
-    [item setAudioMix:_videoTool.videoAudioMixTools];
+- (void)adfasdWithComposition:(AVAsset *)composition audioMix:(AVAudioMix *)audioMix videoCompositon:(AVVideoComposition *)videoComposition{
+    AVPlayerItem *item = [AVPlayerItem playerItemWithAsset:composition];
+    [item setAudioMix:audioMix];
+    item.videoComposition = videoComposition;
     AVPlayer *tmpPlayer = [AVPlayer playerWithPlayerItem:item];
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:tmpPlayer];
     playerLayer.frame = self.view.bounds;
     playerLayer.videoGravity = AVLayerVideoGravityResize;
+    tmpPlayer.volume = 1;
     [self.view.layer addSublayer:playerLayer];
     [tmpPlayer play];
 }

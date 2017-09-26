@@ -1,0 +1,371 @@
+{
+  "frames": [
+    {
+      "filename": "foreground0000",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0001",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0002",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0003",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0004",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0005",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 3,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0006",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0007",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0008",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0009",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0010",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0011",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 294,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0012",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0013",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0014",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0015",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0016",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0017",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 585,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0018",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0019",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0020",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0021",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0022",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0023",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 876,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0024",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0025",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0026",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0027",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0028",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0029",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 1167,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0030",
+      "d": 0.075,
+      "frame": {
+        "x": 3,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0031",
+      "d": 0.075,
+      "frame": {
+        "x": 366,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0032",
+      "d": 0.075,
+      "frame": {
+        "x": 729,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0033",
+      "d": 0.075,
+      "frame": {
+        "x": 1092,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0034",
+      "d": 0.075,
+      "frame": {
+        "x": 1455,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    },
+    {
+      "filename": "foreground0035",
+      "d": 0.075,
+      "frame": {
+        "x": 1818,
+        "y": 1458,
+        "w": 360,
+        "h": 288
+      }
+    }
+  ],
+  "meta": {
+    "image": "y726foreground.png",
+    "size": {
+      "w": 2188,
+      "h": 1756
+    }
+  }
+}
